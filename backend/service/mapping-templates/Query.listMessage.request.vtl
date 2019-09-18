@@ -1,0 +1,17 @@
+{
+  "version": "2017-02-28",
+  "operation": "Query",
+  "query": {
+    "expression": "#key = :key",
+    "expressionValues": {
+      ":key": $util.dynamodb.toStringJson("message/createdAt")
+    },
+    "expressionNames": {
+      "#key": "key"
+    }
+  },
+  "index": "key-value-index",
+  "limit": #if($context.arguments.limit) $context.arguments.limit #else 10 #end,
+  "nextToken": #if($context.arguments.nextToken) "${context.arguments.nextToken}" #else null #end,
+  "scanIndexForward": false
+}

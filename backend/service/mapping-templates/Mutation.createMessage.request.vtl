@@ -1,0 +1,31 @@
+#set($id = $util.autoId())
+#set($now = $util.time.nowISO8601())
+#set($sub = $context.identity.sub)
+
+#set($items = [
+  {
+    "id": $util.dynamodb.toString("${id}"),
+    "key": $util.dynamodb.toString("message"),
+    "value": $util.dynamodb.toString("${context.arguments.input.value}"),
+    "createdBy": $util.dynamodb.toString("${sub}"),
+    "createdAt": $util.dynamodb.toString("${now}")
+  },
+  {
+    "id": $util.dynamodb.toString("${id}"),
+    "key": $util.dynamodb.toString("message/createdBy"),
+    "value": $util.dynamodb.toString("${sub}")
+  },
+  {
+    "id": $util.dynamodb.toString("${id}"),
+    "key": $util.dynamodb.toString("message/createdAt"),
+    "value": $util.dynamodb.toString("${now}")
+  }
+])
+
+{
+  "version" : "2018-05-29",
+  "operation" : "BatchPutItem",
+  "tables" : {
+    "${DynamoDB}": $utils.toJson($items)
+  }
+}

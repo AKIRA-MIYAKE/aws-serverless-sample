@@ -1,0 +1,7 @@
+#foreach($row in $context.result.data.${DynamoDB})
+#if(${row.key} == "message")
+#set($all = $row)
+#end
+#end
+
+$util.toJson($all)

@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  node:
+    image: node:10.15
+    env_file: .env
+    working_dir: /code
+    command: sh dev.sh
+    volumes:
+      - ./:/code
+    ports:
+      - 3000:3000

@@ -1,0 +1,20 @@
+.message-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.message-table__thead-tr {
+  border-bottom: 2px solid lightgrey;
+}
+
+.message-table__tbody-tr {
+  border-bottom: 1px solid lightgrey;
+}
+
+.message-table__tbody-tr:last-of-type {
+  border-bottom: none;
+}

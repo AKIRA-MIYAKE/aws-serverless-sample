@@ -1,0 +1,37 @@
+type Message @aws_api_key @aws_oidc {
+	id: ID!
+	value: String!
+	createdBy: String!
+	createdAt: String!
+}
+
+type MessageKeyValue @aws_api_key @aws_oidc {
+	id: ID!
+	key: String!
+	value: String!
+	message: Message
+}
+
+type MessageCollection @aws_api_key @aws_oidc {
+	items: [MessageKeyValue!]!
+	nextToken: String
+	scannedCount: Int
+}
+
+type Query @aws_api_key @aws_oidc {
+	readMessage(id: ID!): Message
+	listMessage(limit: Int, nextToken: String): MessageCollection!
+}
+
+input CreateMessageInput {
+	value: String!
+}
+
+input DeleteMessageInput {
+	id: ID!
+}
+
+type Mutation @aws_oidc {
+	createMessage(input: CreateMessageInput!): Message!
+	deleteMessage(input: DeleteMessageInput!): Message
+}

@@ -1,0 +1,14 @@
+{
+  "version": "2017-02-28",
+  "operation": "DeleteItem",
+  "key": {
+    "id": $util.dynamodb.toStringJson("${context.arguments.input.id}"),
+    "key": $util.dynamodb.toStringJson("message")
+  },
+  "condition": {
+    "expression": "createdBy = :createdBy",
+    "expressionValues": {
+      ":createdBy": $util.dynamodb.toStringJson("${context.identity.sub}")
+    }
+  }
+}
